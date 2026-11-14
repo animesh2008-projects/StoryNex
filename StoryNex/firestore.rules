@@ -1,0 +1,67 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidStory(data) {
+      return data.title is string && data.title.size() > 0 &&
+             data.genre is string &&
+             data.status in ['draft', 'active', 'completed'] &&
+             data.ownerId == request.auth.uid;
+    }
+
+    function isValidChapter(data) {
+      return data.title is string &&
+             data.order is int &&
+             data.content is string &&
+             data.status in ['draft', 'generated', 'final'];
+    }
+
+    // User profile isolation
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+
+      // Stories subcollection
+      match /stories/{storyId} {
+        allow read, delete: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidStory(request.resource.data);
+        allow update: if isOwner(userId) && request.resource.data.ownerId == resource.data.ownerId;
+
+        // Chapters subcollection
+        match /chapters/{chapterId} {
+          allow read, delete: if isOwner(userId);
+          allow create, update: if isOwner(userId) && isValidChapter(request.resource.data);
+        }
+
+        // Characters subcollection
+        match /characters/{characterId} {
+          allow read, write: if isOwner(userId);
+        }
+
+        // Memories subcollection (3-layer memory)
+        match /memories/{memoryId} {
+          allow read, write: if isOwner(userId);
+        }
+
+        // Branches subcollection
+        match /branches/{branchId} {
+          allow read, write: if isOwner(userId);
+        }
+      }
+    }
+
+    // Catch-all deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

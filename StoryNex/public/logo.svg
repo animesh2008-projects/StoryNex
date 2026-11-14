@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Outer Cosmic Nexus Ring -->
+  <circle cx="32" cy="32" r="28" stroke="#252530" stroke-width="2" stroke-dasharray="4 4" />
+  <!-- Portal Arc -->
+  <path d="M18 42C14 36 14 28 18 22C23 16 31 14 38 17C45 20 49 27 48 35C47 41 42 47 36 49" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Geometric Narrative Book Spine & Foliage -->
+  <path d="M32 16L32 48" stroke="#A78BFA" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Left Folio Page -->
+  <path d="M32 20C26 19 20 22 16 26V44C20 40 26 38 32 39V20Z" fill="#15151C" stroke="#A78BFA" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Right Folio Page -->
+  <path d="M32 20C38 19 44 22 48 26V44C44 40 38 38 32 39V20Z" fill="#1B1B24" stroke="#67E8F9" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Core Universe Nexus Node -->
+  <circle cx="32" cy="32" r="3.5" fill="#67E8F9" />
+  <circle cx="32" cy="32" r="1.5" fill="#0B0B0F" />
+</svg>
