@@ -1,5 +1,6 @@
 
 # STORYNEX — Every Story Has a Universe.
+**Live Demo:** https://story-nex-ru5b.vercel.app/
 
 **STORYNEX** is an AI-powered narrative creation and intelligence platform designed to help authors build, organize, and evolve fictional universes. 
 
